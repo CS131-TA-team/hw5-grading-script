@@ -4,6 +4,7 @@
 ## Usage
 * Create a folder for each submission in the `submissions` folder
 * Put `expr-compare.ss` in the corresponding folder. Make sure there are `#lang racket` and `(provide (all-defined-out))` lines in that file.
+* Please make sure that in your `expr-compare.ss`, there are only definitions. Top-level function calls such as `(test-expr-compare test-expr-x test-expr-y)` may cause compiling error and thus not allowed.
 * Execute the script via
   ```shell
   ./main.rkt ./submissions
