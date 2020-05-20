@@ -77,6 +77,30 @@
         (test-case '(lambda (x y) (+ (x y) '(y x)))
                    '(lambda (y x) (+ (y x) '(x y)))
                    '(lambda (x!y y!x) (+ (x!y y!x) (if % '(y x) '(x y))))) ; # 35
+        (test-case '(((λ (g)
+                        ((λ (x) (g (λ () (x x))))     ; This is the way we define a recursive function
+                         (λ (x) (g (λ () (x x))))))   ; when we don't have 'letrec'
+                      (λ (r)                               ; Here (r) will be the function itself
+                        (λ (n) (if (= n 0)
+                                   1
+                                   (* n ((r) (- n 1))))))) ; Therefore this thing calculates factorial of n
+                     10)
+                   '(((λ (x)
+                        ((λ (n) (x (λ () (n n))))
+                         (λ (r) (x (λ () (r r))))))
+                      (λ (g)
+                        (λ (x) (if (= x 0)
+                                   1
+                                   (* x ((g) (- x 1)))))))
+                     9)
+                   '(((λ (g!x)
+                        ((λ (x!n) (g!x (λ () (x!n x!n))))
+                         (λ (x!r) (g!x (λ () (x!r x!r))))))
+                      (λ (r!g)
+                        (λ (n!x) (if (= n!x 0)
+                                     1
+                                     (* n!x ((r!g) (- n!x 1)))))))
+                     (if % 10 9))) ; # 36
         ))
 
 ;; Extra test cases, which are not counted into the grades
