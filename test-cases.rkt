@@ -68,7 +68,7 @@
         (test-case '(lambda (lambda) lambda) '(λ (λ) λ) '(λ (lambda!λ) lambda!λ)) ; # 30
         (test-case ''lambda '(quote λ) '(if % 'lambda 'λ)) ; # 31
         (test-case '(lambda (a b) a) '(λ (a) a) '(if % (lambda (a b) a) (λ (a) a))) ; # 32
-        (test-case '(lambda (let) (let ((x 1)) x))
+        (test-case '(λ (let) (let ((x 1)) x))
                    '(lambda (let) (let ((y 1)) y))
                    '(λ (let) (let (((if % x y) 1)) (if % x y)))) ; # 33
         (test-case '(λ (x) ((λ (x) x) x))
